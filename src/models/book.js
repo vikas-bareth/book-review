@@ -48,4 +48,26 @@ const bookSchema = new mongoose.Schema(
 // Text index for search functionality
 bookSchema.index({ title: "text", author: "text" });
 
+// Static method for search
+bookSchema.statics.search = async function (query, page = 1, limit = 10) {
+  const skip = (page - 1) * limit;
+
+  const results = await this.find(
+    { $text: { $search: query } },
+    { score: { $meta: "textScore" } }
+  )
+    .sort({ score: { $meta: "textScore" } })
+    .skip(skip)
+    .limit(limit);
+
+  const total = await this.countDocuments({ $text: { $search: query } });
+
+  return {
+    results,
+    total,
+    pages: Math.ceil(total / limit),
+    currentPage: page,
+  };
+};
+
 module.exports = mongoose.model("Book", bookSchema);
