@@ -96,3 +96,35 @@ exports.deleteReview = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getMyReviews = async (req, res, next) => {
+  try {
+    const { page = 1, limit = 10 } = req.query;
+    const skip = (page - 1) * limit;
+
+    const [reviews, total] = await Promise.all([
+      Review.find({ userId: req.user.id })
+        .populate({
+          path: "bookId",
+          select: "title author",
+        })
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(parseInt(limit)),
+      Review.countDocuments({ userId: req.user.id }),
+    ]);
+
+    res.status(200).json({
+      success: true,
+      data: reviews,
+      pagination: {
+        total,
+        pages: Math.ceil(total / limit),
+        currentPage: parseInt(page),
+        limit: parseInt(limit),
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
