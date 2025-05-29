@@ -1,61 +1,60 @@
-````markdown
+`````markdown
+---
 # Book Review API
 
 A production-ready REST API for managing books and reviews with JWT authentication.
-
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js v16+
-- MongoDB (local or connection string)
-- npm
+- **Node.js** v16+
+- **MongoDB** (Local instance or connection string )
+- **npm**
+
+---
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-repo/book-review-api.git
-   cd book-review-api
-   ```
-````
+1. **Clone the Repository**
 
-2. **Install dependencies**
+   ```bash
+   git clone https://github.com/your-repo/book-review.git
+   cd book-review
+   ```
+
+2. **Install Dependencies**
 
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
 3. **Environment Setup**
 
    ```bash
-   # Copy the example files
-   cp .env.example .env.development
-   cp .env.example .env.production
-
-   # Edit the development environment
-   nano .env.development
+   touch .env.production .env.development
    ```
 
 4. **Database Setup**
-   - Ensure MongoDB is running locally or update the DB_URL
+
+   - Ensure MongoDB is running locally or provide a valid connection string in `DB_URL` inside `.env.development` or `.env.production`.
+
+---
 
 ### Running the Application
 
-**Development Mode** (with hot reload)
+**Development Mode** (with hot reload using `nodemon`):
 
 ```bash
 npm run dev
 ```
 
-**Production Mode**
+**Production Mode**:
 
 ```bash
-npm run build && npm run prod
+npm run build
+npm run start
 ```
 
 ---
@@ -103,9 +102,7 @@ FRONTEND_URL=https://yourdomain.com
 
 ## 📁 Project Structure
 
-````
-
-```plaintext
+```s
 book-review/
 ├── src/
 │   ├── config/          # DB and app configurations
@@ -119,7 +116,8 @@ book-review/
 ├── .env                # Environment variables
 ├── package.json        # Project config
 └── README.md           # Documentation
-````
+```
+`````
 
 ---
 
