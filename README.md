@@ -6,7 +6,7 @@ A production-ready REST API for managing books and reviews with JWT authenticati
 ## 📁 Project Structure
 ```
 
-```
+```plaintext
 book-review/
 ├── src/
 │ ├── config/ # Configuration files
