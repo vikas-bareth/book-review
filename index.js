@@ -13,6 +13,8 @@ const listEndpoints = require("express-list-endpoints");
 const cors = require("cors");
 const logger = require("./src/utils/logger");
 const authRouter = require("./src/routes/auth.route");
+const bookRouter = require("./src/routes/book.route");
+const reviewRouter = require("./src/routes/review.route");
 const http = require("http");
 
 const httpServer = http.createServer(app);
@@ -40,6 +42,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRouter);
+app.use("/api/books", bookRouter);
+app.use("/api/", reviewRouter);
 app.use(errorHandler);
 
 connectDB().then(() => {
