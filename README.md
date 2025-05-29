@@ -9,30 +9,17 @@ A production-ready REST API for managing books and reviews with JWT authenticati
 ```plaintext
 book-review/
 ├── src/
-│ ├── config/ # Configuration files
-│ │ └── database.js # DB connection setup
-│ ├── controllers/ # Business logic
-│ │ ├── auth.controller.js
-│ │ ├── book.controller.js
-│ │ └── review.controller.js
-│ ├── middlewares/ # Express middleware
-│ │ ├── admin.js # Admin role checker
-│ │ ├── auth.js # Authentication
-│ │ └── errorHandler.js # Central error handling
-│ ├── models/ # MongoDB schemas
-│ │ ├── book.js
-│ │ ├── review.js
-│ │ └── user.js
-│ ├── routes/ # Route definitions
-│ │ ├── auth.route.js
-│ │ ├── book.route.js
-│ │ └── review.route.js
-│ ├── utils/ # Utilities
-│ │ ├── ApiError.js # Custom error class
-│ │ └── logger.js # Logging system
-├── .env.example # Environment template
-├── package.json
-└── README.md
+│   ├── config/          # DB and app configurations
+│   ├── controllers/     # Route controllers
+│   ├── middlewares/     # Custom middleware
+│   ├── models/          # Database models
+│   ├── routes/          # API route definitions
+│   └── utils/           # Helper functions
+│
+├── index.js            # Main app entry point
+├── .env                # Environment variables
+├── package.json        # Project config
+└── README.md           # Documentation
 ```
 
 ---
