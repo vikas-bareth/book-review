@@ -4,7 +4,7 @@ const User = require("../models/user");
 
 exports.signup = async (req, res, next) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, role } = req.body;
 
     if (!firstName || !lastName || !email || !password) {
       throw new ApiError(400, "Missing required fields!");
@@ -15,11 +15,14 @@ exports.signup = async (req, res, next) => {
       throw new ApiError(400, `User already exists with email:${email}`);
     }
 
+    const userRole = role === "admin" ? "admin" : "user";
+
     const user = await User.create({
       firstName,
       lastName,
       email,
       password,
+      role: userRole,
     });
     const token = user.getJWT();
 
