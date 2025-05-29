@@ -1,10 +1,109 @@
-```markdown
+````markdown
 # Book Review API
 
 A production-ready REST API for managing books and reviews with JWT authentication.
 
-## 📁 Project Structure
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js v16+
+- MongoDB (local or connection string)
+- npm
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-repo/book-review-api.git
+   cd book-review-api
+   ```
+````
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Environment Setup**
+
+   ```bash
+   # Copy the example files
+   cp .env.example .env.development
+   cp .env.example .env.production
+
+   # Edit the development environment
+   nano .env.development
+   ```
+
+4. **Database Setup**
+   - Ensure MongoDB is running locally or update the DB_URL
+
+### Running the Application
+
+**Development Mode** (with hot reload)
+
+```bash
+npm run dev
 ```
+
+**Production Mode**
+
+```bash
+npm run build && npm run prod
+```
+
+---
+
+## 🔐 Environment Configuration
+
+### Required Variables (.env.development)
+
+```ini
+# Application
+NODE_ENV=development
+PORT=7777
+APP_URL=http://localhost:7777
+
+# Database
+DB_URL=mongodb://localhost:27017/book-review
+
+# Authentication
+JWT_SECRET=your_development_secret_here
+JWT_EXPIRE=1d
+
+# Frontend
+FRONTEND_URL=http://localhost:3000
+```
+
+### Production Variables (.env.production)
+
+```ini
+# Application
+NODE_ENV=production
+PORT=80
+APP_URL=https://yourdomain.com
+
+# Database
+DB_URL=mongodb+srv://<user>:<password>@cluster.mongodb.net/<db-name>
+
+# Authentication
+JWT_SECRET=your_strong_production_secret
+
+# Frontend
+FRONTEND_URL=https://yourdomain.com
+```
+
+---
+
+## 📁 Project Structure
+
+````
 
 ```plaintext
 book-review/
@@ -20,101 +119,7 @@ book-review/
 ├── .env                # Environment variables
 ├── package.json        # Project config
 └── README.md           # Documentation
-```
-
----
-
-## 🛠️ Setup & Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/your-repo/book-review-api.git
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Set up environment variables:
-
-   ```bash
-   touch .env.development .env.production
-   ```
-
-4. Start the server:
-
-   ```bash
-   npm run dev   # Development mode
-   npm run prod  # Production mode
-   ```
-
----
-
-## 🌐 API Endpoints
-
-| Method | Endpoint                 | Description                | Auth Required |
-| ------ | ------------------------ | -------------------------- | ------------- |
-| POST   | `/auth/signup`           | User registration          | No            |
-| POST   | `/auth/login`            | User login                 | No            |
-| GET    | `/auth/me`               | Get current user           | Yes           |
-| POST   | `/auth/logout`           | User logout                | Yes           |
-| POST   | `/api/books`             | Create new book            | Yes           |
-| GET    | `/api/books`             | Get all books (paginated)  | No            |
-| GET    | `/api/books/search`      | Search books               | No            |
-| GET    | `/api/books/:id`         | Get book details + reviews | No            |
-| DELETE | `/api/books/:id`         | Delete book                | Admin Only    |
-| POST   | `/api/books/:id/reviews` | Add review                 | Yes           |
-| PUT    | `/api/reviews/:id`       | Update review              | Owner Only    |
-| DELETE | `/api/reviews/:id`       | Delete review              | Owner Only    |
-| GET    | `/api/reviews/me`        | Get current user's reviews | Yes           |
-
----
-
-## 🗃️ Database Schema
-
-### Models Overview
-
-**User (`user.js`)**
-
-```javascript
-{
-  firstName: String,
-  lastName: String,
-  email: String,    // Unique
-  password: String, // Hashed
-  role: String,     // 'user' or 'admin'
-  timestamps: true
-}
-```
-
-**Book (`book.js`)**
-
-```javascript
-{
-  title: String,
-  author: String,
-  genre: String,
-  publishedYear: Number,
-  description: String,
-  createdBy: ObjectId, // Reference to User
-  timestamps: true
-}
-```
-
-**Review (`review.js`)**
-
-```javascript
-{
-  bookId: ObjectId,  // Reference to Book
-  userId: ObjectId,  // Reference to User
-  rating: Number,    // 1-5
-  reviewText: String,
-  timestamps: true
-}
-```
+````
 
 ---
 
@@ -188,7 +193,7 @@ curl -X POST http://localhost:7777/api/books/BOOK_ID/reviews \
 ## 🚀 Postman Collection
 
 Find ready-to-use API tests in:
-`/postman-collections/Book-API.postman_collection.json`
+`/postman-collections/Book-Review API.postman_collection.json`
 
 Import this into Postman for:
 
