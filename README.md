@@ -1,4 +1,3 @@
-`````markdown
 ---
 # Book Review API
 
@@ -117,7 +116,6 @@ book-review/
 ├── package.json        # Project config
 └── README.md           # Documentation
 ```
-`````
 
 ---
 
@@ -230,7 +228,3 @@ Import this into Postman for:
 3. Add unit/integration tests
 4. Set up CI/CD pipeline
 5. Add health check endpoint
-
-```
-
-```
