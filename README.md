@@ -218,6 +218,11 @@ Import this into Postman for:
 4. **Static Methods**
    - Business logic encapsulated in models
    - Example: `Book.search()`
+     
+5. **Database Schema diagram**
+   
+   ![book-review](https://github.com/user-attachments/assets/1b00790a-7c83-4598-94d2-471b538983b7)
+
 
 ---
 
