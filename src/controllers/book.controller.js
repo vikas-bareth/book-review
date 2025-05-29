@@ -107,3 +107,24 @@ exports.searchBooks = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.deleteBook = async (req, res, next) => {
+  try {
+    const book = await Book.findById(req.params.id);
+
+    if (!book) {
+      throw new ApiError(404, "Book not found");
+    }
+    await Review.deleteMany({ bookId: book._id });
+
+    await Book.deleteOne({ _id: book._id });
+
+    res.status(200).json({
+      success: true,
+      data: null,
+      message: "Book and all its reviews deleted successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};

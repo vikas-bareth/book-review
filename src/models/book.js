@@ -45,7 +45,6 @@ const bookSchema = new mongoose.Schema(
   }
 );
 
-// Text index for search functionality
 bookSchema.index({ title: "text", author: "text" });
 
 // Static method for search
