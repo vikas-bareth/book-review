@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "98523dad-ab24-4d25-9b35-43633b49355c",
+		"name": "Book-Review",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24364735"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"user2\",\n  \"lastName\":\"test2\",\n  \"email\": \"user2@test.com\",\n  \"password\": \"user2@1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/auth/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "Signup ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"admin\",\n  \"lastName\":\"test\",\n  \"email\": \"admin@test.com\",\n  \"password\": \"admin@1234\",\n  \"role\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/auth/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.environment.set(\"customer_token\", jsonData.token);",
+									"pm.environment.set(\"customer_id\", jsonData.user.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@test.com\",\n  \"password\": \"admin@1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/auth/login",
+						"description": "Save the token as environment variable"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{auth_token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/auth/me"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{base_url}}/auth/logout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Create Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\":\"The Great Gatsby\",\"author\":\"F. Scott Fitzgerald\",\"genre\":\"Classic\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:7777/api/books"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Books with paginations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:7777/api/books"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/books/search?q=gatsby",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"books",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "gatsby"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Book By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:7777/api/books/6838afc57ee5f7414748306d"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete book (ADMIN ONLY)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_ADMIN_TOKEN"
+							}
+						],
+						"url": "http://localhost:7777/api/books/BOOK_ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Add Review",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"rating\":5,\"reviewText\":\"Excellent book!\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:7777/api/books/BOOK_ID/reviews"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"rating\":4,\"reviewText\":\"Great book but has some flaws\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:7777/api/reviews/6838b1c3f7fd33bde1027292"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_TOKEN"
+							}
+						],
+						"url": "http://localhost:7777/api/reviews/6838b1c3f7fd33bde1027292"
+					},
+					"response": []
+				},
+				{
+					"name": "My Reviews",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_TOKEN"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:7777/api/reviews/me?page=1&limit=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"reviews",
+								"me"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

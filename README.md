@@ -6,6 +6,7 @@ A production-ready REST API for managing books and reviews with JWT authenticati
 ## 📁 Project Structure
 ```
 
+```
 book-review/
 ├── src/
 │ ├── config/ # Configuration files
@@ -32,26 +33,38 @@ book-review/
 ├── .env.example # Environment template
 ├── package.json
 └── README.md
+```
 
-````
+---
 
 ## 🛠️ Setup & Installation
 
-1. Clone repository
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-repo/book-review-api.git
+   ```
+
 2. Install dependencies:
+
    ```bash
    npm install
-````
+   ```
 
-3. Create `.env` file:
+3. Set up environment variables:
+
    ```bash
    touch .env.development .env.production
    ```
-4. Start server:
+
+4. Start the server:
+
    ```bash
-   npm run dev  # Development
-   npm run prod # Production
+   npm run dev   # Development mode
+   npm run prod  # Production mode
    ```
+
+---
 
 ## 🌐 API Endpoints
 
@@ -70,6 +83,8 @@ book-review/
 | PUT    | `/api/reviews/:id`       | Update review              | Owner Only    |
 | DELETE | `/api/reviews/:id`       | Delete review              | Owner Only    |
 | GET    | `/api/reviews/me`        | Get current user's reviews | Yes           |
+
+---
 
 ## 🗃️ Database Schema
 
@@ -114,6 +129,8 @@ book-review/
 }
 ```
 
+---
+
 ## 🔐 Key Features
 
 ### 1. Authentication System
@@ -151,6 +168,8 @@ book-review/
 - Rate limiting (recommended addition)
 - CORS restrictions
 
+---
+
 ## 📬 API Examples
 
 ### Create Book (Authenticated)
@@ -177,6 +196,8 @@ curl -X POST http://localhost:7777/api/books/BOOK_ID/reviews \
   }'
 ```
 
+---
+
 ## 🚀 Postman Collection
 
 Find ready-to-use API tests in:
@@ -187,6 +208,8 @@ Import this into Postman for:
 - Pre-configured requests
 - Example payloads
 - Environment setup
+
+---
 
 ## 🧠 Design Decisions
 
@@ -207,6 +230,8 @@ Import this into Postman for:
 4. **Static Methods**
    - Business logic encapsulated in models
    - Example: `Book.search()`
+
+---
 
 ## 🔜 Future Improvements
 
